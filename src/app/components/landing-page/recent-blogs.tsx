@@ -49,7 +49,7 @@ const recentPosts = [
 export default function RecentBlogs() {
     return (
         <>
-            <div className="flex flex-col gap-8 px-32 py-24">
+            <div className="flex flex-col gap-8 px-4 md:px-32 py-24">
 
                 <div className="flex w-full justify-between items-center gap-2 py-6 border-b border-neutral-800">
 

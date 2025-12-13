@@ -43,10 +43,10 @@ export default function Hero({ latestBlog }: HeroProps) {
         <>
             <div className="flex flex-col gap-12 items-center justify-center">
 
-                <div className="relative text-[200px] font-primary tracking-wide font-bold leading-none select-none">
+                <div className="relative text-[80px] md:text-[200px] font-primary tracking-wide font-bold leading-none select-none">
 
                     <div
-                        className="absolute inset-0 top-5 text-transparent opacity-10 bg-clip-text z-0 pointer-events-none"
+                        className="absolute inset-0 top-2 md:top-5 text-transparent opacity-10 bg-clip-text z-0 pointer-events-none"
                         style={{
                             backgroundImage: "radial-gradient(circle, #a3a3a3 1.5px, transparent 1px)",
                             backgroundSize: "4px 4px",
@@ -67,29 +67,29 @@ export default function Hero({ latestBlog }: HeroProps) {
                     <Carousel />
                 </div>
 
-                <div className="grid grid-cols-2 justify-between w-full gap-12 px-32 py-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 justify-between w-full gap-12 px-4 md:px-32 py-12">
 
-                    <div className="flex flex-col justify-between gap-6">
+                    <div className="flex flex-col justify-between gap-6 order-2 md:order-1">
 
                         <div>
 
-                            <div className="text-7xl tracking-tight font-secondary font-bold">
-                            A modern magazine for curious minds
-                        </div>
-                        <div className="text-base font-inter">
-                            Dive into well-crafted stories, interviews, and guides designed to inform, inspire, and keep you updated with the latest in news, and creativity.
-                        </div>
+                            <div className="text-4xl md:text-7xl tracking-tight font-secondary font-bold">
+                                A modern magazine for curious minds
+                            </div>
+                            <div className="text-base font-inter mt-4">
+                                Dive into well-crafted stories, interviews, and guides designed to inform, inspire, and keep you updated with the latest in news, and creativity.
+                            </div>
 
                         </div>
-                        
 
-                        <div className="w-full mt-26">
-                    <SubscribeBox />
-                </div>
+
+                        <div className="w-full mt-12 md:mt-26">
+                            <SubscribeBox />
+                        </div>
 
                     </div>
 
-                    <div>
+                    <div className="order-1 md:order-2">
                         <BlogCard
                             number="LATEST"
                             category={blog.category}
