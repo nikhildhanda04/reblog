@@ -2,6 +2,7 @@ import Navbar from "../components/common/navbar";
 import Footer from "../components/common/footer";
 import BlogList from "./blog-list";
 import { getBlogs } from "@/lib/sheets";
+import FadeIn from "../components/common/fade-in";
 
 export const revalidate = 60;
 
@@ -19,7 +20,9 @@ export default async function AllBlogsPage() {
                     </h1>
                 </header>
 
-                <BlogList initialBlogs={initialBlogs} />
+                <FadeIn delay={0.2}>
+                    <BlogList initialBlogs={initialBlogs} />
+                </FadeIn>
             </main>
 
             <Footer />

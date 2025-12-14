@@ -4,6 +4,7 @@ import RecentBlogs from "./components/landing-page/recent-blogs";
 import Quote from "./components/landing-page/quote";
 import Footer from "./components/common/footer";
 import { getLatestBlog, getBlogs } from "@/lib/sheets";
+import FadeIn from "./components/common/fade-in";
 
 export const revalidate = 60; // Revalidate every minute
 
@@ -15,9 +16,18 @@ export default async function Home() {
     <>
       <div>
         <Navbar />
-        <Hero latestBlog={latestBlog || undefined} />
-        <RecentBlogs blogs={blogs} />
-        <Quote />
+        <FadeIn>
+          <Hero latestBlog={latestBlog || undefined} />
+        </FadeIn>
+
+        <FadeIn delay={0.2}>
+          <RecentBlogs blogs={blogs} />
+        </FadeIn>
+
+        <FadeIn delay={0.3}>
+          <Quote />
+        </FadeIn>
+
         <Footer />
       </div>
     </>

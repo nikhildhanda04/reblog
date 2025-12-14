@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nanum_Myeongjo, BBH_Sans_Hegarty, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
+import SmoothScroll from "./components/common/smooth-scroll";
 
 const bbhSansHegarty = BBH_Sans_Hegarty({
     variable: "--font-bbh-sans-hegarty",
@@ -43,6 +44,7 @@ export default function RootLayout({
             >
                 {children}
                 <Analytics />
+                <SmoothScroll />
             </body>
         </html>
     );
