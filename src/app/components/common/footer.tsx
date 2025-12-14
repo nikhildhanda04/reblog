@@ -14,7 +14,7 @@ export default function Footer() {
                     <div className="lg:col-span-6 flex flex-col gap-8 pr-0 lg:pr-12">
                         <div className="flex flex-col gap-4">
                             <h2 className="text-3xl font-bold tracking-tighter uppercase font-primary">
-                                Reado<span className="text-xs align-top ml-1">TM</span>
+                                Law Journal<span className="text-xs align-top ml-1">TM</span>
                             </h2>
                             <p className="text-2xl font-secondary">Never miss an update</p>
                         </div>
@@ -31,7 +31,7 @@ export default function Footer() {
                                 </button>
                             </div>
                             <p className="text-xs text-white/40 mt-3 font-inter">
-                                By subscribing to Reado's newsletter, you agree to our Privacy Policy.
+                                By subscribing to Law Journal's newsletter, you agree to our Privacy Policy.
                             </p>
                         </div>
                     </div>

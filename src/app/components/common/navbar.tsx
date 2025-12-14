@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
     return (
         <>
@@ -8,13 +10,15 @@ export default function Navbar() {
                 </div>
 
                 <div className="flex flex-wrap justify-center items-center font-inter font-medium text-neutral-700 text-sm gap-4">
+                    <Link href="/" className="hover:text-black transition-colors">HOME</Link>
+                    <Link href="/all-blogs" className="hover:text-black transition-colors">BLOGS</Link>
+                    {/* <Link href="/contact">CONTACT</Link> */}
 
-                    <div>HOME</div>
-                    <div>BLOG</div>
-                    <div>CONTACT</div>
-
-                    <div className="text-sm bg-black px-2 py-1 rounded-md text-white ml-4">SUBSCRIBE</div>
-
+                    <Link href="/subscribe">
+                        <div className="text-sm bg-black px-2 py-1 rounded-md text-white ml-4 cursor-pointer hover:bg-neutral-800 transition-colors">
+                            SUBSCRIBE
+                        </div>
+                    </Link>
                 </div>
             </div>
         </>

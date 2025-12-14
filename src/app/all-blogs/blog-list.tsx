@@ -45,6 +45,7 @@ export default function BlogList({ initialBlogs }: BlogListProps) {
                     <BlogCard
                         key={`${blog.id}-${index}`}
                         number={blog.id} // Or generate a number based on index if styling requires "001"
+                        imageSrc={blog.image}
                         category={blog.category}
                         author={blog.author}
                         readTime={blog.readTime}
