@@ -3,6 +3,38 @@ import Footer from "../../components/common/footer";
 import Image from "next/image";
 import { getBlogBySlug } from "@/lib/sheets";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+    const { slug } = await params;
+    const blog = await getBlogBySlug(slug);
+
+    if (!blog) {
+        return {
+            title: "Blog Not Found",
+        };
+    }
+
+    return {
+        title: blog.title,
+        description: `Read ${blog.title} by ${blog.author}. ${blog.readTime}.`,
+        openGraph: {
+            title: blog.title,
+            description: `Read ${blog.title} by ${blog.author}.`,
+            type: "article",
+            authors: [blog.author],
+            publishedTime: blog.publishedAt,
+            images: [
+                {
+                    url: blog.image,
+                    width: 1200,
+                    height: 630,
+                    alt: blog.title,
+                },
+            ],
+        },
+    };
+}
 
 export default async function BlogPost({ params }: { params: { slug: string } }) {
     const { slug } = await params; // Next.js 15+ needs this awaited
@@ -17,6 +49,22 @@ export default async function BlogPost({ params }: { params: { slug: string } })
             <Navbar />
 
             <main className="grow pt-32 pb-24 px-4 md:px-8">
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "BlogPosting",
+                            "headline": blog.title,
+                            "image": [blog.image],
+                            "datePublished": blog.publishedAt,
+                            "author": [{
+                                "@type": "Person",
+                                "name": blog.author,
+                            }]
+                        })
+                    }}
+                />
                 <article className="max-w-3xl mx-auto flex flex-col gap-12">
 
                     {/* Header */}

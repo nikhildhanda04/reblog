@@ -9,7 +9,7 @@ interface BlogCardProps {
     author: string;
     readTime: string;
     title: string;
-    slug?: string; // Add slug prop
+    slug?: string; 
 }
 
 export default function BlogCard({
@@ -19,12 +19,12 @@ export default function BlogCard({
     author,
     readTime,
     title,
-    slug = "demo-post" // Default slug for now
+    slug = "demo-post" 
 }: BlogCardProps) {
     return (
         <Link href={`/blog/${slug}`} className="block">
             <div className="border border-black bg-white p-2 w-full group cursor-pointer transition-colors duration-300 h-full flex flex-col">
-                {/* Top Bar */}
+               
                 <div className="flex items-center justify-between mb-2 text-[10px] font-mono tracking-wider text-black/80">
                     <div className="flex gap-1">
                         <div className="w-2 h-2 rounded-full border border-black bg-transparent group-hover:bg-black transition-colors duration-300"></div>
@@ -37,7 +37,6 @@ export default function BlogCard({
                     <div>[NO. {number}]</div>
                 </div>
 
-                {/* Image Container */}
                 <div className="relative w-full aspect-4/3 overflow-hidden border border-black mb-3 bg-neutral-200">
                     {imageSrc ? (
                         <Image

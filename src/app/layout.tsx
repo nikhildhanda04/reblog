@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nanum_Myeongjo, BBH_Sans_Hegarty, Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 
 const bbhSansHegarty = BBH_Sans_Hegarty({
@@ -41,6 +42,7 @@ export default function RootLayout({
                 className={`${bbhSansHegarty.variable} ${nanumMyeongjo.variable} ${inter.variable} antialiased`}
             >
                 {children}
+                <Analytics />
             </body>
         </html>
     );
