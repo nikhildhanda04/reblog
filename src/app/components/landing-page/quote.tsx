@@ -12,11 +12,16 @@ export default function Quote() {
                     <div className="grow h-px border-t border-dashed border-black mx-2"></div>
                 </div>
 
-                <div className="relative aspect-4/3 w-full grayscale border border-black overflow-hidden bg-neutral-200">
+                <div className="relative aspect-4/3 w-full border border-black overflow-hidden bg-neutral-200">
                   
-                    <div className="absolute inset-0 flex items-center justify-center text-neutral-500">
-                        Portrait Image
-                    </div>
+                    <Image 
+                    src="/quote.png"
+                    alt="quote"
+
+                    fill
+                    className="absolute inset-0 flex items-center object-cover justify-center text-neutral-500">
+                        
+                    </Image>
                 </div>
             </div>
 
@@ -32,8 +37,8 @@ export default function Quote() {
                 </div>
 
                 <div className="flex flex-col items-center gap-1">
-                    <div className="font-secondary text-xl">Lokansha Balyan</div>
-                    <div className="font-inter text-sm text-neutral-600 uppercase tracking-wide">Founder & Editor-in-Chief</div>
+                    <div className="font-secondary text-xl">Lokansha</div>
+                    <div className="font-inter text-sm text-neutral-600 uppercase tracking-wide">Founder & Law Student</div>
                 </div>
             </div>
         </section>

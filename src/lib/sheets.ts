@@ -20,17 +20,8 @@ const GOOGLE_CLIENT_EMAIL = process.env.GOOGLE_CLIENT_EMAIL || "";
 const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n') || "";
 
 // Mock Data for Fallback
-const MOCK_BLOG: BlogPost = {
-    id: "mock-1",
-    title: "How e-commerce is redefining global shopping trends",
-    slug: "how-e-commerce-is-redefining-global-shopping-trends",
-    author: "Emily Johnson",
-    category: "Business",
-    readTime: "6 min read",
-    image: "/placeholder-hero.jpg",
-    content: "<p>Mock content...</p>",
-    publishedAt: "2024-10-24"
-};
+// Mock Data removed
+
 
 async function getAuthClient() {
     if (!GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY) {
@@ -47,6 +38,27 @@ async function getAuthClient() {
 }
 
 /**
+ * Transforms a Google Drive share link into a direct download/view link.
+ */
+function transformGoogleDriveURL(url: string): string {
+    if (!url) return "";
+
+    // Check if it's a Drive link
+    if (url.includes("drive.google.com")) {
+        // Extract ID
+        // Patterns:
+        // 1. .../file/d/FILE_ID/view...
+        // 2. ...id=FILE_ID...
+        const fileIdMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+
+        if (fileIdMatch && fileIdMatch[1]) {
+            return `https://drive.google.com/uc?export=view&id=${fileIdMatch[1]}`;
+        }
+    }
+    return url;
+}
+
+/**
  * Fetches all blogs from the "Blogs" sheet.
  * Assumes Sheet headers: id, title, slug, author, category, readTime, image, content, publishedAt
  */
@@ -60,8 +72,9 @@ export async function getBlogs(limit?: number, offset: number = 0): Promise<Blog
     if (!client || !SPREADSHEET_ID) {
         console.warn("Google Sheets credentials missing. Returning mock data.");
         // Mock pagination logic
-        if (offset > 0) return []; // Only one mock blog
-        return [MOCK_BLOG];
+        if (offset > 0) return [];
+        return [];
+
     }
 
     try {
@@ -93,23 +106,30 @@ export async function getBlogs(limit?: number, offset: number = 0): Promise<Blog
             author: row[3] || "",
             category: row[4] || "",
             readTime: row[5] || "",
-            image: row[6] || "",
+            image: transformGoogleDriveURL(row[6] || ""),
             content: row[7] || "",
             publishedAt: row[8] || "",
         }));
     } catch (error) {
         console.error("Error fetching blogs from Sheets:", error);
-        return [MOCK_BLOG];
+        return [];
+
     }
 }
 
-export async function getLatestBlog(): Promise<BlogPost> {
+export async function getLatestBlog(): Promise<BlogPost | null> {
     const blogs = await getBlogs();
-    if (blogs.length === 0) return MOCK_BLOG;
+    if (blogs.length === 0) return null;
+
     // Assuming the last row is the latest, or we sort by date.
     // For now, let's take the first one or the last one? 
     // Usually new rows are added at bottom.
     return blogs[blogs.length - 1];
+}
+
+export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
+    const blogs = await getBlogs();
+    return blogs.find((blog) => blog.slug === slug) || null;
 }
 
 /**

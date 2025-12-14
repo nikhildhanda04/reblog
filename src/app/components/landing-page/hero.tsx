@@ -11,6 +11,7 @@ interface HeroProps {
         author: string;
         readTime: string;
         category: string;
+        image: string;
         slug: string;
     };
 }
@@ -36,6 +37,7 @@ export default function Hero({ latestBlog }: HeroProps) {
         author: "Michael Smith",
         readTime: "7 min read",
         category: "Tech",
+        image: "",
         slug: "demo-post"
     };
 
@@ -54,12 +56,11 @@ export default function Hero({ latestBlog }: HeroProps) {
                             opacity: 0.5
                         }}
                     >
-                        READO
+                        Law Journal
                     </div>
 
-                    {/* Main Text Layer */}
-                    <div className="relative z-10 text-black">
-                        READO
+                    <div className="relative z-10 text-center text-black">
+                        Law Journal
                     </div>
                 </div>
 
@@ -92,6 +93,7 @@ export default function Hero({ latestBlog }: HeroProps) {
                     <div className="order-1 md:order-2">
                         <BlogCard
                             number="LATEST"
+                            imageSrc={blog.image}
                             category={blog.category}
                             author={blog.author}
                             readTime={blog.readTime}

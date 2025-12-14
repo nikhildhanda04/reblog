@@ -1,52 +1,12 @@
 import BlogCard from "../blog/blog-card";
 import Link from "next/link";
+import { BlogPost } from "@/lib/sheets";
 
-const recentPosts = [
-    {
-        number: "001",
-        category: "Design",
-        author: "Sarah Jenkins",
-        readTime: "5 min read",
-        title: "The evolution of minimalism in digital product design",
-    },
-    {
-        number: "002",
-        category: "Technology",
-        author: "David Ross",
-        readTime: "8 min read",
-        title: "Understanding the impact of AI on creative workflows",
-    },
-    {
-        number: "003",
-        category: "Lifestyle",
-        author: "Emily Chen",
-        readTime: "4 min read",
-        title: "Building sustainable habits for remote work success",
-    },
-    {
-        number: "004",
-        category: "Culture",
-        author: "Marcus Johnson",
-        readTime: "6 min read",
-        title: "Why storytelling matters more than ever in branding",
-    },
-    {
-        number: "005",
-        category: "Coding",
-        author: "Alex Turner",
-        readTime: "10 min read",
-        title: "A definitive guide to React server components in 2025",
-    },
-    {
-        number: "006",
-        category: "Finance",
-        author: "Jessica Lee",
-        readTime: "7 min read",
-        title: "Smart investment strategies for digital nomads",
-    },
-];
+interface RecentBlogsProps {
+    blogs: BlogPost[];
+}
 
-export default function RecentBlogs() {
+export default function RecentBlogs({ blogs }: RecentBlogsProps) {
     return (
         <>
             <div className="flex flex-col gap-8 px-4 md:px-32 py-24">
@@ -65,10 +25,16 @@ export default function RecentBlogs() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                    {recentPosts.map((post, index) => (
+                    {blogs.map((post, index) => (
                         <BlogCard
-                            key={index}
-                            {...post}
+                            key={post.id || index}
+                            imageSrc={post.image}
+                            number={`00${index + 1}`.slice(-3)}
+                            category={post.category}
+                            author={post.author}
+                            readTime={post.readTime}
+                            title={post.title}
+                            slug={post.slug}
                         />
                     ))}
                 </div>

@@ -39,13 +39,18 @@ export default function BlogCard({
 
                 {/* Image Container */}
                 <div className="relative w-full aspect-4/3 overflow-hidden border border-black mb-3 bg-neutral-200">
-                    {/* Placeholder image logic */}
-                    <div className="absolute inset-0 bg-neutral-300 flex items-center justify-center text-neutral-500 group-hover:grayscale transition-all duration-500">
-                        {/* If we had a real image component, it would go here. Using a colored div for demo. */}
-                        <div className="w-full h-full bg-indigo-100 group-hover:bg-neutral-200 transition-colors duration-500 flex items-center justify-center">
-                            Image
+                    {imageSrc ? (
+                        <Image
+                            src={imageSrc}
+                            alt={title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                    ) : (
+                        <div className="absolute inset-0 bg-neutral-300 flex items-center justify-center text-neutral-500">
+                            No Image
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* Info */}
