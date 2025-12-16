@@ -5,6 +5,7 @@ import { getBlogBySlug } from "@/lib/sheets";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import FadeIn from "../../components/common/fade-in";
+import CommentSection from "../../components/blog/comment-section";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const { slug } = await params;
@@ -119,6 +120,12 @@ export default async function BlogPost({ params }: { params: { slug: string } })
                         </div>
 
                     </article>
+                </FadeIn>
+                
+                <div className="border-t border-black/10 my-16"></div>
+
+                <FadeIn delay={0.2}>
+                    <CommentSection slug={slug} />
                 </FadeIn>
             </main>
 

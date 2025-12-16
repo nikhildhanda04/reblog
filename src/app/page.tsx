@@ -6,11 +6,11 @@ import Footer from "./components/common/footer";
 import { getLatestBlog, getBlogs } from "@/lib/sheets";
 import FadeIn from "./components/common/fade-in";
 
-export const revalidate = 60; // Revalidate every minute
+export const revalidate = 60; 
 
 export default async function Home() {
   const latestBlog = await getLatestBlog();
-  const blogs = await getBlogs(6); // Fetch 6 recent blogs
+  const blogs = await getBlogs(6);
 
   return (
     <>

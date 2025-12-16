@@ -23,18 +23,17 @@ const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n')
 // Mock Data removed
 
 
-async function getAuthClient() {
+function getAuth() {
     if (!GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY) {
         return null;
     }
-    const auth = new google.auth.GoogleAuth({
+    return new google.auth.GoogleAuth({
         credentials: {
             client_email: GOOGLE_CLIENT_EMAIL,
             private_key: GOOGLE_PRIVATE_KEY,
         },
         scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
-    return auth.getClient();
 }
 
 /**
@@ -68,8 +67,8 @@ function transformGoogleDriveURL(url: string): string {
  * Rows start at 2 (1-indexed, header is 1).
  */
 export async function getBlogs(limit?: number, offset: number = 0): Promise<BlogPost[]> {
-    const client = await getAuthClient();
-    if (!client || !SPREADSHEET_ID) {
+    const auth = getAuth();
+    if (!auth || !SPREADSHEET_ID) {
         console.warn("Google Sheets credentials missing. Returning mock data.");
         // Mock pagination logic
         if (offset > 0) return [];
@@ -78,7 +77,7 @@ export async function getBlogs(limit?: number, offset: number = 0): Promise<Blog
     }
 
     try {
-        const sheets = google.sheets({ version: "v4", auth: client as any });
+        const sheets = google.sheets({ version: "v4", auth });
 
         let range = "Blogs!A2:I";
         if (limit) {
@@ -132,29 +131,4 @@ export async function getBlogBySlug(slug: string): Promise<BlogPost | null> {
     return blogs.find((blog) => blog.slug === slug) || null;
 }
 
-/**
- * Adds a subscriber email to the "Subscribers" sheet.
- */
-export async function addSubscriber(email: string): Promise<boolean> {
-    const client = await getAuthClient();
-    if (!client || !SPREADSHEET_ID) {
-        console.warn("Google Sheets credentials missing. Cannot add subscriber.");
-        return false; // Fail if no DB
-    }
 
-    try {
-        const sheets = google.sheets({ version: "v4", auth: client as any });
-        await sheets.spreadsheets.values.append({
-            spreadsheetId: SPREADSHEET_ID,
-            range: "Subscribers!A:B",
-            valueInputOption: "USER_ENTERED",
-            requestBody: {
-                values: [[email, new Date().toISOString()]],
-            },
-        });
-        return true;
-    } catch (error) {
-        console.error("Error adding subscriber:", error);
-        return false;
-    }
-}
