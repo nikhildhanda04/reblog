@@ -39,7 +39,10 @@ export default function CommentForm({ slug, onCommentAdded }: { slug: string, on
             <div className="bg-neutral-100 p-6 rounded-lg text-center border border-neutral-200">
                 <p className="text-neutral-600 mb-4 font-secondary">Sign in to leave a comment</p>
                 <button
-                    onClick={() => authClient.signIn.social({ provider: "google" })}
+                    onClick={() => authClient.signIn.social({ 
+                        provider: "google",
+                        callbackURL: window.location.href 
+                    })}
                     className="bg-black text-white px-6 py-2 rounded-full font-medium hover:bg-neutral-800 transition-colors flex items-center gap-2 mx-auto"
                 >
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .533 5.333.533 12S5.867 24 12.48 24c3.44 0 6.013-1.133 8.053-3.24 2.08-2.16 2.747-5.467 2.747-8.24 0-.8-.08-1.547-.187-2.293h-10.613z"/></svg>
