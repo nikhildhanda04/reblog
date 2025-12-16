@@ -43,7 +43,6 @@ export default function Footer() {
                         <div className="flex flex-col gap-3 font-inter text-sm text-white/70 uppercase tracking-widest">
                             <a href="#" className="hover:text-white transition-colors">Home</a>
                             <a href="#" className="hover:text-white transition-colors">Blogs</a>
-                            <a href="#" className="hover:text-white transition-colors">Contact</a>
                         </div>
                     </div>
 
@@ -52,10 +51,10 @@ export default function Footer() {
                     <div className="lg:col-span-2 flex flex-col gap-6">
                         <h3 className="font-secondary text-2xl">Socials</h3>
                         <div className="flex flex-col gap-3 font-inter text-sm text-white/70 uppercase tracking-widest">
-                            <a href="#" className="hover:text-white transition-colors">Instagram</a>
-                            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-                            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-                            <a href="#" className="hover:text-white transition-colors">Pinterest</a>
+                            <a href="https://www.instagram.com/lokankshaa/" target="_blank" className="hover:text-white transition-colors">Instagram</a>
+                            <a href="https://www.linkedin.com/in/lokansha-a1a939266/"
+                            target="_blank"
+                            className="hover:text-white transition-colors">LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -67,7 +66,7 @@ export default function Footer() {
 
                 <div className="flex flex-col md:flex-row justify-between items-center text-xs text-white/40 font-inter gap-4">
                     <div>Developed by Nikhil Dhanda, Powered by Web Mantra Solutions</div>
-                    <div>© 2025 Reado. All rights reserved.</div>
+                    <div>© 2025 Law Journal. All rights reserved.</div>
                 </div>
             </div>
         </footer>
